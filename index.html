@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/script.js"></script>
+  <title>Mesto</title>
+</head>
+
+<body class="root">
+      <header class="header">
+        <img src="./images/logo.svg" alt="логотип Место" class="header__logo">
+      </header>
+      <section class="profile">
+        <img src="./images/avatar.jpg" alt="Джим Моррисон" class="profile__logo">
+        <div class="profile__info">
+          <div class="profile__user">
+            <h3 class="profile__name">
+              Джим Моррисон
+            </h3>
+            <p class="profile__occupation">
+              Певец
+            </p>
+          </div>
+          <div class="profile__edit-button"></div>
+        </div>
+        <div class="profile__add-button"></div>
+      </section>
+      <section class="places">
+          <div class="place">
+            <img src="./images/capri.jpg" alt="остров Капри" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Капри</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+          <div class="place">
+            <img src="./images/lissabon.jpg" alt="город Лиссабон" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Лиссабон</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+          <div class="place">
+            <img src="./images/madrid.jpg" alt="город Мадрид" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Мадрид</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+          <div class="place">
+            <img src="./images/positano.jpg" alt="город Позитано" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Позитано</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+          <div class="place">
+            <img src="./images/riga.jpg" alt="город Рига" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Рига</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+          <div class="place">
+            <img src="./images/sorrento.jpg" alt="город Сорренто" class="place__image">
+            <div class="place__description">
+              <h3 class="place__title">Сорренто</h3>
+              <img src="./images/like.svg" alt="иконка сердце" class="place__icon">
+            </div>
+          </div>
+      </section>
+      <footer class="footer">
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
+      </footer>
+      <div class="edit-profile">
+        <form class="edit-profile__form" method="post" action="#">
+          <button class="edit-profile__button-close" type="button" aria-label="закрыть"></button>
+          <h3 class="edit-profile__title">Редактировать профиль</h3>
+          <input class="edit-profile__input edit-profile__input-name" type="text" id="name" name="name" value="Джим Моррисон" placeholder="Введите имя" required>
+          <input class="edit-profile__input edit-profile__input-occupation" type="text" id="occupation" name="occupation" value="певец" placeholder="Род занятий" required>
+          <input class="edit-profile__button-submit" type="submit" value="Сохранить">
+        </form>
+      </div>
+  </body>
+</html>
