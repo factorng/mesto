@@ -22,13 +22,23 @@ window.onload = function(e) {
       form.style.visibility = 'hidden';
       overlay.style.visibility = 'hidden';
     } else {
-      form.classList.add('animate_show');
       form.style.visibility = 'visible';
       overlay.style.visibility = 'visible';
     }
   }
   edit_btn.addEventListener('click', toggleForm);
-  close_btn.addEventListener('click', toggleForm);
+  close_btn.addEventListener('click', function(){
+    profile_name.textContent = 'Джим Моррисон';
+    profile_occupation.textContent = 'певец';
+    input_name.value = 'Джим Моррисон';
+    input_occupation.value = 'певец';
+    toggleForm();
+    // такой ресет формы Вы имели ввиду?
+    // или нужно, чтоб значения по-умолчанию подставлялись?
+    // вместо имени - "введите имя"
+    // вместо рода занятий - "род занятий"
+
+  });
 }
 
 
