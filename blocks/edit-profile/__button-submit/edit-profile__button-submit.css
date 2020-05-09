@@ -1,6 +1,8 @@
 .edit-profile__button-submit {
   background-color: #000;
   color: #fff;
+  font-size: 1.125rem;
+  line-height: 1.375rem;
   border: 0;
   width: 358px;
   height: 50px;
@@ -15,7 +17,7 @@
   .edit-profile__button-submit {
     width: 200px;
     height: 30px;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 0.9rem;
+    line-height: 1rem;
   }
 }

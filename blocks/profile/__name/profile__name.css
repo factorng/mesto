@@ -1,13 +1,14 @@
 .profile__name {
   color: #fff;
-  font-size: 42px;
-  line-height: 56px;
+  font-size: 2.625rem;
+  line-height: 3.5rem;
   font-style: normal;
   font-weight: 500;
   margin: 0;
 }
 @media screen and (max-width: 486px) {
   .profile__name {
-    font-size: 27px;
+    font-size: 1.688rem;
+    line-height: 3.5rem;
   }
 }
