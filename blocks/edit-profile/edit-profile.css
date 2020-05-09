@@ -1,8 +1,8 @@
-@import url(../edit-profile/__form/edit-profile__form.css);
-@import url(../edit-profile/__button-close/edit-profile__button-close.css);
-@import url(../edit-profile/__title/edit-profile__title.css);
-@import url(../edit-profile/__input/edit-profile__input.css);
-@import url(../edit-profile/__button-submit/edit-profile__button-submit.css);
+@import url(./__form/edit-profile__form.css);
+@import url(./__button-close/edit-profile__button-close.css);
+@import url(./__title/edit-profile__title.css);
+@import url(./__input/edit-profile__input.css);
+@import url(./__button-submit/edit-profile__button-submit.css);
 .edit-profile {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;

@@ -1,7 +1,7 @@
-@import url(../place/__image/place__image.css);
-@import url(../place/__description/place__description.css);
-@import url(../place/__title/place__title.css);
-@import url(../place/__button-like/place__button-like.css);
+@import url(./__image/place__image.css);
+@import url(./__description/place__description.css);
+@import url(./__title/place__title.css);
+@import url(./__button-like/place__button-like.css);
 .place {
   display: flex;
   flex-direction: column;

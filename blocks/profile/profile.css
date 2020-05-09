@@ -1,9 +1,9 @@
-@import url(../profile/__logo/profile__logo.css);
-@import url(../profile/__info/profile__info.css);
-@import url(../profile/__name/profile__name.css);
-@import url(../profile/__occupation/profile__occupation.css);
-@import url(../profile/__add-button/profile__add-button.css);
-@import url(../profile/__edit-button/profile__edit-button.css);
+@import url(./__logo/profile__logo.css);
+@import url(./__info/profile__info.css);
+@import url(./__name/profile__name.css);
+@import url(./__occupation/profile__occupation.css);
+@import url(./__add-button/profile__add-button.css);
+@import url(./__edit-button/profile__edit-button.css);
 .profile {
   max-width: 882px;
   margin: 0 auto 54px auto;

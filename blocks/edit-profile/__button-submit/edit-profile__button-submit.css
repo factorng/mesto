@@ -3,11 +3,12 @@
   color: #fff;
   font-size: 1.125rem;
   line-height: 1.375rem;
+  font-weight: 500;
   border: 0;
   width: 358px;
-  height: 50px;
   align-self: center;
   cursor: pointer;
+  padding: 4%;
 }
 .edit-profile__button-submit:hover {
   opacity: .6;
@@ -16,7 +17,6 @@
 @media screen and (max-width: 520px) {
   .edit-profile__button-submit {
     width: 200px;
-    height: 30px;
     font-size: 0.9rem;
     line-height: 1rem;
   }
