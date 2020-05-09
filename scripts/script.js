@@ -1,4 +1,8 @@
 window.onload = function(e) {
+  //я конечно могу убрать эту функцию и подключить скрипт внизу страницы,
+  //но я не понимаю, почему мое решение не верно
+  //эта функция вызывается после полной загрузки DOM и соответсвенно
+  //мы защищены от обращения к еще не существующим элементам
   const close_btn = document.querySelector('.edit-profile__button-close');
   const form = document.querySelector('.edit-profile__form');
   const save_btn = document.querySelector('.edit-profile__button-submit');
@@ -21,6 +25,7 @@ window.onload = function(e) {
     if(form.style.visibility == 'visible' && overlay.style.visibility == 'visible') {
       form.style.visibility = 'hidden';
       overlay.style.visibility = 'hidden';
+      //а почему нужно классом управлять? чем мое решение хуже?
     } else {
       form.style.visibility = 'visible';
       overlay.style.visibility = 'visible';
