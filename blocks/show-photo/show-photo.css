@@ -1,0 +1,17 @@
+@import url(./__window/show-photo__window.css);
+@import url(./__image/show-photo__image.css);
+@import url(./__button-close/show-photo__button-close.css);
+@import url(./__title/show-photo__title.css);
+
+.show-photo {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
