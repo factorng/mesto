@@ -8,8 +8,17 @@
   width: 22px;
   height: 20px;
   cursor: pointer;
+  margin-left: auto;
 }
 .place__button-like:hover {
   opacity: .6;
   transition: .6s;
+}
+.place__button-like:focus {
+  outline: none;
+  cursor: pointer;
+}
+.place__button-like::-moz-focus-inner {
+  border: 0;
+  cursor: pointer;
 }

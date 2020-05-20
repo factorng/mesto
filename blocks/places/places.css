@@ -2,9 +2,9 @@
   max-width: 900px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 288px);
+  grid-template-columns: repeat(auto-fit, 282px);
   grid-auto-rows: repeat(auto-fill, 361px);
-  grid-column-gap: 12px;
+  grid-column-gap: 20px;
   grid-row-gap: 20px;
   justify-content:  center;
 }

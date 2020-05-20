@@ -23,48 +23,7 @@
         <button class="profile__add-button" type="button"></button>
       </section>
       <section class="places">
-          <div class="place">
-            <img src="./images/capri.jpg" alt="смотровая площадка со скамейками на острове Капри" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Капри</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
-          <div class="place">
-            <img src="./images/lissabon.jpg" alt="панорама города город Лиссабон" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Лиссабон</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
-          <div class="place">
-            <img src="./images/madrid.jpg" alt="оживленный перекресток в городе Мадрид" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Мадрид</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
-          <div class="place">
-            <img src="./images/positano.jpg" alt="панорама города Позитано среди скал" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Позитано</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
-          <div class="place">
-            <img src="./images/riga.jpg" alt="новогодня ель и ярмарка у собора в Риге" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Рига</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
-          <div class="place">
-            <img src="./images/sorrento.jpg" alt="набережная с ресторанами в городе Сорренто на закате" class="place__image">
-            <div class="place__description">
-              <h3 class="place__title">Сорренто</h3>
-              <button class="place__button-like" type="button"></button>
-            </div>
-          </div>
+
       </section>
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
@@ -78,6 +37,31 @@
           <input class="edit-profile__button-submit" type="submit" value="Сохранить">
         </form>
       </div>
+      <div class="add-card">
+        <form class="add-card__form" method="post" action="#">
+          <button class="add-card__button-close" type="button" aria-label="закрыть"></button>
+          <h3 class="add-card__title">Новое место</h3>
+          <input class="add-card__input add-card__input-name" type="text" id="place_name" name="place_name" value="" placeholder="Название" required>
+          <input class="add-card__input add-card__input-link" type="text" id="place_link" name="place_link" value="" placeholder="Ссылка на картинку" required>
+          <input class="add-card__button-submit" type="submit" value="Сохранить">
+        </form>
+      </div>
+      <div class="show-photo">
+        <div class="show-photo__window">
+          <button class="show-photo__button-close" type="button" aria-label="закрыть"></button>
+          <img src="" alt="" class="show-photo__image">
+          <p class="show-photo__title"></p>
+        </div>
+      </div>
+      <template id="cardImage">
+        <div class="place">
+          <img src="" alt="" class="place__image">
+          <button class="place__button-delete" type="button"></button>
+          <div class="place__description">
+            <h3 class="place__title"></h3>
+            <button class="place__button-like" type="button"></button>
+        </div>>
+      </template>
     <script src="./scripts/script.js"></script>
   </body>
 </html>

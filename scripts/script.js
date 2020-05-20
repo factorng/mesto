@@ -8,6 +8,43 @@ const input_name = document.querySelector('.edit-profile__input-name');
 const input_occupation = document.querySelector('.edit-profile__input-occupation');
 const edit_btn = document.querySelector('.profile__edit-button');
 
+const addCardForm = document.querySelector('.add-card__form');
+const addCardForm_window = document.querySelector('.add-card');
+const addCardForm_add_btn = document.querySelector('.profile__add-button');
+const addCardForm_close_btn = document.querySelector('.add-card__button-close');
+const cardImageWrapper = document.querySelector('.places');
+const cardImageTemplate = document.querySelector('#cardImage').content;
+const addCardInputName = document.querySelector('.add-card__input-name');
+const addCardInputLink = document.querySelector('.add-card__input-link');
+const showPhotoWindow = document.querySelector('.show-photo');
+const showPhotoWindow_close_btn = document.querySelector('.show-photo__button-close');
+const initialCards = [
+  {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profile_name.textContent = input_name.value;
@@ -23,6 +60,62 @@ function toggleForm() {
   }
   edit_window.classList.toggle('edit-profile_open');
 }
-
 edit_btn.addEventListener('click', toggleForm);
 close_btn.addEventListener('click', toggleForm);
+
+function addCardFormSubmitHandler(evt) {
+  evt.preventDefault();
+  let addObj = {};
+  addObj.name = addCardInputName.value;
+  addObj.link = addCardInputLink.value;
+  initialCards.unshift(addObj);
+  toggleAddCardForm();
+  showCards();
+}
+addCardForm.addEventListener('submit', addCardFormSubmitHandler);
+
+function toggleAddCardForm() {
+  if(!addCardForm_window.classList.contains('add-card_open')) {
+
+  }
+  addCardForm_window.classList.toggle('add-card_open');
+}
+
+function showCards() {
+  cardImageWrapper.querySelectorAll('*').forEach(elem => elem.remove());
+  initialCards.forEach((elem) => {
+    let cardImage = cardImageTemplate.cloneNode(true);
+    cardImage.querySelector('.place__title').innerText = elem.name;
+    cardImage.querySelector('.place__image').src = elem.link;
+    cardImageWrapper.append(cardImage);
+  });
+}
+addCardForm_add_btn.addEventListener('click', toggleAddCardForm);
+addCardForm_close_btn.addEventListener('click', toggleAddCardForm);
+cardImageWrapper.addEventListener('click', (evt) => {
+  if(evt.target.className == 'place__button-delete') {
+    evt.target.parentElement.remove();
+    let cardToDelete = initialCards.find((el) => el.name == evt.target.parentElement.querySelector('.place__title').innerText);
+    initialCards.splice(initialCards.indexOf(cardToDelete), 1);
+  }
+  if(evt.target.className == 'place__button-like' || evt.target.className == 'place__button-like place__button-like_active' ) {
+    toggleLike(evt);
+  }
+  if(evt.target.className == 'place__image') {
+    showPhotoWindow.classList.toggle('show-photo_active');
+    showPhoto(evt);
+  }
+});
+showPhotoWindow_close_btn.addEventListener('click', (evt) => {
+  showPhotoWindow.classList.toggle('show-photo_active');
+});
+function toggleLike(evt) {
+  evt.target.classList.toggle('place__button-like_active');
+}
+function showPhoto(evt) {
+  showPhotoWindow.querySelector('.show-photo__image').src = evt.target.src;
+  showPhotoWindow.querySelector('.show-photo__title').innerText = evt.target.parentElement.querySelector('.place__title').innerText;
+}
+window.onload = function() {
+  showCards();
+};
