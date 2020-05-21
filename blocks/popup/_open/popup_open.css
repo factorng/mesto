@@ -1,4 +1,4 @@
-.show-photo_active {
+.popup_open {
   opacity: 1;
   visibility: visible;
   -webkit-transition: opacity .5s linear;

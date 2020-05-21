@@ -3,8 +3,8 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
-  grid-auto-rows: repeat(auto-fill, 361px);
-  grid-column-gap: 20px;
+  grid-auto-rows: auto;
+  grid-column-gap: 18px;
   grid-row-gap: 20px;
   justify-content:  center;
 }

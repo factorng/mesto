@@ -1,4 +1,4 @@
-.edit-profile__form {
+.popup__form {
   background-color: #fff;
   position: relative;
   width: 430px;
@@ -12,9 +12,10 @@
   justify-content: space-between;
 }
 @media screen and (max-width: 520px) {
-  .edit-profile__form {
-    width: 280px;
-    height: 180px;
-    padding: 15px;
+  .popup__form {
+    width: 240px;
+    height: 258px;
+    padding: 30px 18px;
+    box-sizing: border-box;
   }
 }
