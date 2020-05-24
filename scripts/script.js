@@ -19,8 +19,11 @@ const editProfile = {
       editProfile.inputName.value = editProfile.profileName.textContent;
       editProfile.inputOccupation.value = editProfile.profileOccupation.textContent;
     }
-    editProfile.editWindow.classList.toggle('popup_open');
+    editProfile.popupToggle(editProfile.editWindow);
   },
+  popupToggle: function(elem) {
+    elem.classList.toggle('popup_open');
+  }
 };
 editProfile.form.addEventListener('submit', editProfile.formSubmitHandler);
 editProfile.editBtn.addEventListener('click', editProfile.formToggle);
@@ -38,70 +41,49 @@ const addCard = {
   initialCards: [
     {
         name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
         name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
         name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     },
     {
         name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
         name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
         name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-        like: 0
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ],
   formSubmitHandler: function(evt) {
     evt.preventDefault();
-    addCard.addData(addCard.inputName.value, addCard.inputLink.value);
-    addCard.showCard({name: addCard.inputName.value, link: addCard.inputLink.value});
+    addCard.showCard(addCard.inputName.value, addCard.inputLink.value, 'begin');
     addCard.toggleForm();
   },
   toggleForm: function() {
-    addCard.window.classList.toggle('popup_open');
+    editProfile.popupToggle(addCard.window);
     addCard.inputName.value = '';
     addCard.inputLink.value = '';
   },
-  showCard: function(addObj, endBeginAdd = 'begin') {
-    let cardImage = addCard.cardImageTemplate.cloneNode(true);
-    cardImage.querySelector('.place__title').innerText = addObj.name;
-    cardImage.querySelector('.place__image').alt = addObj.name;
-    cardImage.querySelector('.place__image').src = addObj.link;
-    if(endBeginAdd == 'begin'){
+  showCard: function(name, link, endBeginAdd = 'begin') {
+    const cardImage = addCard.cardImageTemplate.cloneNode(true);
+    cardImage.querySelector('.place__title').innerText = name;
+    cardImage.querySelector('.place__image').alt = name;
+    cardImage.querySelector('.place__image').src = link;
+    if(endBeginAdd === 'begin'){
       addCard.cardImageWrapper.prepend(cardImage);
-    }else if(endBeginAdd == 'end') {
+    }else if(endBeginAdd === 'end') {
       addCard.cardImageWrapper.append(cardImage);
     }
-
-  },
-  addData: function(name, link) {
-    let addObj = {};
-    addObj.name = name;
-    addObj.link = link;
-    addObj.like = 0;
-    addCard.initialCards.unshift(addObj);
-    console.log('Add', addCard.initialCards);
-  },
-  deleteData: function(evt) {
-    let cardToDelete = addCard.initialCards.find((el) => el.name == evt.target.parentElement.querySelector('.place__title').innerText);
-    addCard.initialCards.splice(addCard.initialCards.indexOf(cardToDelete), 1);
-    console.log('Delete', addCard.initialCards);
   }
 };
 addCard.form.addEventListener('submit', addCard.formSubmitHandler);
@@ -124,16 +106,10 @@ const showPhoto = {
 
  function toggleLike(evt) {
    evt.target.classList.toggle('place__button-like_active');
-   addCard.initialCards.forEach((elem, i, arr) => {
-    if(elem.name == evt.target.parentElement.querySelector('.place__title').innerText) {
-      elem.like = 1;
-    }
-   });
  }
  addCard.cardImageWrapper.addEventListener('click', (evt) => {
   if(evt.target.className == 'place__button-delete') {
     evt.target.parentElement.remove();
-    addCard.deleteData(evt);
   }
   if(evt.target.classList.contains('place__button-like')) {
     toggleLike(evt);
@@ -145,7 +121,7 @@ const showPhoto = {
 
 window.onload = function() {
   addCard.initialCards.forEach((elem) => {
-    addCard.showCard(elem, 'end');
+    addCard.showCard(elem.name, elem.link, 'end');
   });
 
 };
