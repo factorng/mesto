@@ -123,6 +123,11 @@
       addCardCardImageWrapper.append(cardImage);
     }
   }
+
+  function toggleLike(evt) {
+    evt.target.classList.toggle('place__button-like_active');
+  }
+
   //add event listeners for open/close addCard window and form addCard
   addCardForm.addEventListener('submit', addCardFormSubmitHandler);
   addCardAddBtn.addEventListener('click', ()=>{
@@ -143,10 +148,6 @@
   showPhotoCloseBtn.addEventListener('click', (evt) => {
     popupClose(showPhotoWindow);;
   });
-
-  function toggleLike(evt) {
-    evt.target.classList.toggle('place__button-like_active');
-  }
 
 
   window.onload = function () {
