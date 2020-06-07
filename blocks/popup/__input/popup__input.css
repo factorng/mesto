@@ -1,3 +1,4 @@
+@import url('./_type/popup__input_type_error.css');
 .popup__input {
   background-color: #fff;
   border: 0;
@@ -9,3 +10,8 @@
   line-height: 1.063rem;
   font-weight: 400;
 }
+
+
+
+
+

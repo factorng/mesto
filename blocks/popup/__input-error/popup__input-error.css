@@ -1,0 +1,14 @@
+.popup__input-error {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  color: #FF0000;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  display: none;
+}
+.popup__input:focus {
+  outline: none;
+}

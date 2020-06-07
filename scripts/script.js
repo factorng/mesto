@@ -1,3 +1,13 @@
+const formValidationOptions = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+enableValidation(formValidationOptions);
+
   const editProfileCloseBtn = document.querySelector('.popup__button-close');
   const editProfileEditBtn = document.querySelector('.profile__edit-button');
   const editProfileSaveBtn = document.querySelector('.edit-profile__button-submit');
@@ -12,26 +22,26 @@
     evt.preventDefault();
     editProfileProfileName.textContent = editProfileInputName.value;
     editProfileProfileOccupation.textContent = editProfileInputOccupation.value;
-    popupClose(editProfileEditWindow, editProfileFormDataHandler);
+    popupClose(editProfileEditWindow);
   }
 
   function editProfileFormDataHandler() {
     editProfileInputName.value = editProfileProfileName.textContent;
     editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
+    isValid(editProfileForm, editProfileInputName, formValidationOptions);
+    isValid(editProfileForm, editProfileInputOccupation, formValidationOptions);
+    toggleButtonState(editProfileForm, formValidationOptions);
   }
 
-
-  function popupOpen(elem, form) {
+  function popupOpen(elem) {
     elem.classList.add('popup_open');
     document.addEventListener('keydown', escKeyDown);
     document.addEventListener('click', popupOverlayClick);
-    if(form) form();
   }
-  function popupClose(elem, form) {
+  function popupClose(elem) {
     elem.classList.remove('popup_open');
     document.removeEventListener('keydown', escKeyDown);
     document.removeEventListener('click', popupOverlayClick);
-    if(form) form();
   }
 
   function escKeyDown(evt){
@@ -51,7 +61,8 @@
 
   editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
   editProfileEditBtn.addEventListener('click', ()=>{
-    popupOpen(editProfileEditWindow, editProfileFormDataHandler);
+    editProfileFormDataHandler();
+    popupOpen(editProfileEditWindow);
   });
   editProfileCloseBtn.addEventListener('click', ()=>{
     popupClose(editProfileEditWindow);
@@ -95,12 +106,15 @@
   function addCardFormSubmitHandler(evt) {
     evt.preventDefault();
     addCardShowCard(addCardInputName.value, addCardInputLink.value, 'begin');
-    popupClose(addCardWindow, addCardFormDataHandler);
+    popupClose(addCardWindow);
   }
 
   function addCardFormDataHandler() {
     addCardInputName.value = '';
     addCardInputLink.value = '';
+    hideInputError(addCardForm, addCardInputName, formValidationOptions);
+    hideInputError(addCardForm, addCardInputLink, formValidationOptions);
+    toggleButtonState(addCardForm, formValidationOptions);
   }
 
   function addCardShowCard(name, link, endBeginAdd = 'begin') {
@@ -108,20 +122,21 @@
     cardImage.querySelector('.place__title').innerText = name;
     cardImage.querySelector('.place__image').alt = name;
     cardImage.querySelector('.place__image').src = link;
-    cardImage.querySelector('.place__button-delete').addEventListener('click', (evt) => {
-      evt.target.parentElement.remove();
-    });
-    cardImage.querySelector('.place__button-like').addEventListener('click', (evt) => {
-      toggleLike(evt);
-    });
-    cardImage.querySelector('.place__image').addEventListener('click', (evt) => {
-      showPhoto(evt);
-    });
+    cardImage.querySelector('.place__button-delete').addEventListener('click', addCardDeleteCard);
+    cardImage.querySelector('.place__button-like').addEventListener('click', toggleLike);
+    cardImage.querySelector('.place__image').addEventListener('click', showPhoto);
     if (endBeginAdd === 'begin') {
       addCardCardImageWrapper.prepend(cardImage);
     } else if (endBeginAdd === 'end') {
       addCardCardImageWrapper.append(cardImage);
     }
+  }
+
+  function addCardDeleteCard(evt) {
+    evt.target.parentElement.querySelector('.place__button-delete').removeEventListener('click', addCardDeleteCard);
+    evt.target.parentElement.querySelector('.place__button-like').removeEventListener('click', toggleLike);
+    evt.target.parentElement.querySelector('.place__image').removeEventListener('click', showPhoto);
+    evt.target.parentElement.remove();
   }
 
   function toggleLike(evt) {
@@ -131,7 +146,8 @@
   //add event listeners for open/close addCard window and form addCard
   addCardForm.addEventListener('submit', addCardFormSubmitHandler);
   addCardAddBtn.addEventListener('click', ()=>{
-    popupOpen(addCardWindow, addCardFormDataHandler);
+    addCardFormDataHandler();
+    popupOpen(addCardWindow);
   });
   addCardCloseBtn.addEventListener('click', ()=>{
     popupClose(addCardWindow);

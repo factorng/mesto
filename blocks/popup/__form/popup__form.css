@@ -11,10 +11,11 @@
   align-items: flex-start;
   justify-content: space-between;
 }
+
 @media screen and (max-width: 520px) {
   .popup__form {
     width: 240px;
-    height: 258px;
+    height: 358px;
     padding: 30px 18px;
     box-sizing: border-box;
   }

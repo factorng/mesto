@@ -14,6 +14,7 @@
   opacity: .6;
   transition: .6s;
 }
+
 @media screen and (max-width: 520px) {
   .popup__button-submit {
     width: 200px;
