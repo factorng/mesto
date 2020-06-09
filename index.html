@@ -34,20 +34,20 @@
           <div class="popup__input-field">
             <input id="input-name" class="popup__input edit-profile__input-name" type="text" id="name" name="name"
             value="Джим Моррисон" placeholder="Введите имя" minlength="2" maxlength="40"  pattern="^[A-Za-zА-ЯЁа-яё -]+$" required>
-            <span id="input-name-error" class="popup__input-error">Необходимо заполнить данное поле</span>
+            <span id="input-name-error" class="popup__input-error"></span>
           </div>
 
           <div class="popup__input-field">
             <input id="input-occupation" class="popup__input edit-profile__input-occupation" type="text"  name="occupation"
             value="Певец" placeholder="Род занятий" minlength="2" maxlength="200" required>
-            <span id="input-occupation-error" class="popup__input-error">Необходимо заполнить данное поле</span>
+            <span id="input-occupation-error" class="popup__input-error"></span>
           </div>
 
           <button class="popup__button-submit edit-profile__button-submit popup__button-submit_inactive"  type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
       <div class="popup add-card">
-        <form class="popup__form add-card__form" method="post" action="#">
+        <form class="popup__form add-card__form" method="post" action="#" novalidate>
           <button class="popup__button-close add-card__button-close" type="button" aria-label="закрыть"></button>
           <h3 class="popup__title">Новое место</h3>
 
