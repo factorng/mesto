@@ -1,3 +1,5 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 const formValidationOptions = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -68,9 +70,9 @@ function editProfileFormSubmitHandler(evt) {
 function editProfileFormDataHandler() {
   editProfileInputName.value = editProfileProfileName.textContent;
   editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
-  isValid(editProfileForm, editProfileInputName, formValidationOptions);
-  isValid(editProfileForm, editProfileInputOccupation, formValidationOptions);
-  toggleButtonState(editProfileForm, formValidationOptions);
+  const event = new Event('input');
+  editProfileInputName.dispatchEvent(event);
+  editProfileInputOccupation.dispatchEvent(event);
 }
 
 function popupOpen(elem) {
@@ -113,43 +115,21 @@ editProfileCloseBtn.addEventListener('click', () => {
 
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
-  addCardCardImageWrapper.prepend(addCardShowCard(addCardInputName.value, addCardInputLink.value));
+  const card = new Card(addCardInputName.value, addCardInputLink.value, '#cardPlace');
+  const cardElement = card._getCardElement();
+  addCardCardImageWrapper.prepend(cardElement);
   popupClose(addCardWindow);
 }
 
 function addCardFormDataHandler() {
   addCardInputName.value = '';
   addCardInputLink.value = '';
-  hideInputError(addCardForm, addCardInputName, formValidationOptions);
-  hideInputError(addCardForm, addCardInputLink, formValidationOptions);
-  toggleButtonState(addCardForm, formValidationOptions);
+  const event = new Event('errorClear');
+  addCardInputName.dispatchEvent(event);
+  addCardInputLink.dispatchEvent(event);
 }
 
-function addCardShowCard(name, link) {
-  const cardImage = addCardCardImageTemplate.cloneNode(true);
-  const image = cardImage.querySelector('.place__image');
-  const title = cardImage.querySelector('.place__title');
-  const btnDelete = cardImage.querySelector('.place__button-delete');
-  const btnLike = cardImage.querySelector('.place__button-like');
-  title.innerText = name;
-  image.alt = name;
-  image.src = link;
-  btnDelete.addEventListener('click', deleteCard);
-  btnLike.addEventListener('click', toggleLike);
-  image.addEventListener('click', showPhoto);
-  return cardImage;
-}
 
-function deleteCard(evt) {
-  evt.target.parentElement.querySelector('.place__button-delete').removeEventListener('click', deleteCard);
-  evt.target.parentElement.querySelector('.place__button-like').removeEventListener('click', toggleLike);
-  evt.target.parentElement.querySelector('.place__image').removeEventListener('click', showPhoto);
-  evt.target.parentElement.remove();
-}
-
-function toggleLike(evt) {
-  evt.target.classList.toggle('place__button-like_active');
-}
 
 //add event listeners for open/close addCard window and form addCard
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
@@ -172,12 +152,17 @@ showPhotoCloseBtn.addEventListener('click', (evt) => {
 });
 
 
+const validationEditProfileForm = new FormValidator(formValidationOptions, editProfileForm);
+validationEditProfileForm.enableValidation();
+const validationAddCardForm = new FormValidator(formValidationOptions, addCardForm);
+validationAddCardForm.enableValidation();
 
-enableValidation(formValidationOptions);
 
 window.onload = function () {
   addCardInitialCards.forEach((elem) => {
-    addCardCardImageWrapper.prepend(addCardShowCard(elem.name, elem.link));
+    const card = new Card(elem.name, elem.link, '#cardPlace');
+    const cardElement = card._getCardElement();
+    addCardCardImageWrapper.prepend(cardElement);
   });
 
 };

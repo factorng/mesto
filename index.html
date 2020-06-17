@@ -53,12 +53,12 @@
 
           <div class="popup__input-field">
             <input class="popup__input add-card__input-name" type="text" id="input-place-name" name="place_name" value="" placeholder="Название" minlength="2" maxlength="30" required>
-            <span id="input-place-name-error" class="popup__input-error">Необходимо заполнить данное поле</span>
+            <span id="input-place-name-error" class="popup__input-error"></span>
           </div>
 
           <div class="popup__input-field">
             <input class="popup__input add-card__input-link" type="url" id="input-place-link" name="place_link" value="" placeholder="Ссылка на картинку" required>
-            <span id="input-place-link-error" class="popup__input-error">Необходимо заполнить данное поле</span>
+            <span id="input-place-link-error" class="popup__input-error"></span>
           </div>
 
           <button class="popup__button-submit add-card__button-submit popup__button-submit_inactive"  type="submit" aria-label="Создать">Создать</button>
@@ -81,7 +81,8 @@
           </div>
         </div>
       </template>
-      <script src="./scripts/validate.js"></script>
-      <script src="./scripts/script.js"></script>
+      <script type="module" src="./scripts/Card.js"></script>
+      <script type="module" src="./scripts/FormValidator.js"></script>
+      <script type="module" src="./scripts/script.js"></script>
     </body>
 </html>
