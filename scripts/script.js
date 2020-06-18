@@ -114,9 +114,6 @@ function addCardFormDataHandler() {
   addCardInputName.value = '';
   addCardInputLink.value = '';
   validationAddCardForm.resetValidation(addCardInputName, addCardInputLink)
-  // const event = new Event('errorClear');
-  // addCardInputName.dispatchEvent(event);
-  // addCardInputLink.dispatchEvent(event);
 }
 //add event listeners for open/close addCard window and form addCard
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
