@@ -37,6 +37,10 @@ export class FormValidator {
       buttonElement.disabled = true;
     }
   }
+  resetValidation(...inputElements) {
+    inputElements.forEach(inputElement => this._hideInputError(inputElement));
+    this._toggleButtonState();
+  }
   enableValidation() {
     const inputList = Array.from(this._formName.querySelectorAll(this._inputSelector));
     this._formName.addEventListener('sumbit', (evt) => {
@@ -48,12 +52,6 @@ export class FormValidator {
       inputElement.addEventListener('input', () => {
 
         this._isValid(inputElement);
-        this._toggleButtonState();
-
-      });
-      inputElement.addEventListener('errorClear', () => {
-
-        this._hideInputError(inputElement);
         this._toggleButtonState();
 
       });
