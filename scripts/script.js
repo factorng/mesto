@@ -20,7 +20,6 @@ const editProfileProfileOccupation = document.querySelector('.profile__occupatio
 const editProfileInputName = document.querySelector('.edit-profile__input-name');
 const editProfileInputOccupation = document.querySelector('.edit-profile__input-occupation');
 const editProfileForm = document.querySelector('.edit-profile__form');
-//const opened = document.querySelector('.popup_open');
 
 //addCard globals
 const addCardForm = document.querySelector('.add-card__form');
@@ -28,7 +27,6 @@ const addCardWindow = document.querySelector('.add-card');
 const addCardAddBtn = document.querySelector('.profile__add-button');
 const addCardCloseBtn = document.querySelector('.add-card__button-close');
 const addCardCardImageWrapper = document.querySelector('.places');
-//const addCardCardImageTemplate = document.querySelector('#cardPlace').content;
 const addCardInputName = document.querySelector('.add-card__input-name');
 const addCardInputLink = document.querySelector('.add-card__input-link');
 const addCardInitialCards = [{
