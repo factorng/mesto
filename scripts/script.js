@@ -1,5 +1,6 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+
 const formValidationOptions = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -19,7 +20,7 @@ const editProfileProfileOccupation = document.querySelector('.profile__occupatio
 const editProfileInputName = document.querySelector('.edit-profile__input-name');
 const editProfileInputOccupation = document.querySelector('.edit-profile__input-occupation');
 const editProfileForm = document.querySelector('.edit-profile__form');
-const opened = document.querySelector('.popup_open');
+//const opened = document.querySelector('.popup_open');
 
 //addCard globals
 const addCardForm = document.querySelector('.add-card__form');
@@ -27,7 +28,7 @@ const addCardWindow = document.querySelector('.add-card');
 const addCardAddBtn = document.querySelector('.profile__add-button');
 const addCardCloseBtn = document.querySelector('.add-card__button-close');
 const addCardCardImageWrapper = document.querySelector('.places');
-const addCardCardImageTemplate = document.querySelector('#cardPlace').content;
+//const addCardCardImageTemplate = document.querySelector('#cardPlace').content;
 const addCardInputName = document.querySelector('.add-card__input-name');
 const addCardInputLink = document.querySelector('.add-card__input-link');
 const addCardInitialCards = [{
@@ -66,7 +67,6 @@ function editProfileFormSubmitHandler(evt) {
   editProfileProfileOccupation.textContent = editProfileInputOccupation.value;
   popupClose(editProfileEditWindow);
 }
-
 function editProfileFormDataHandler() {
   editProfileInputName.value = editProfileProfileName.textContent;
   editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
@@ -74,33 +74,28 @@ function editProfileFormDataHandler() {
   editProfileInputName.dispatchEvent(event);
   editProfileInputOccupation.dispatchEvent(event);
 }
-
 function popupOpen(elem) {
   elem.classList.add('popup_open');
   document.addEventListener('keydown', escKeyDown);
   document.addEventListener('click', popupOverlayClick);
 }
-
 function popupClose(elem) {
   elem.classList.remove('popup_open');
   document.removeEventListener('keydown', escKeyDown);
   document.removeEventListener('click', popupOverlayClick);
 }
-
 function escKeyDown(evt) {
   const opened = document.querySelector('.popup_open');
   if ((evt.key === 'Escape') && opened) {
     popupClose(opened);
   }
 }
-
 function popupOverlayClick(evt) {
   const opened = document.querySelector('.popup_open');
   if (evt.target.classList.contains('popup_open') && opened) {
     popupClose(opened);
   }
 }
-
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
 editProfileEditBtn.addEventListener('click', () => {
   editProfileFormDataHandler();
@@ -109,14 +104,10 @@ editProfileEditBtn.addEventListener('click', () => {
 editProfileCloseBtn.addEventListener('click', () => {
   popupClose(editProfileEditWindow);
 });
-
-
-
-
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
   const card = new Card(addCardInputName.value, addCardInputLink.value, '#cardPlace');
-  const cardElement = card._getCardElement();
+  const cardElement = card.getCardElement();
   addCardCardImageWrapper.prepend(cardElement);
   popupClose(addCardWindow);
 }
@@ -128,9 +119,6 @@ function addCardFormDataHandler() {
   addCardInputName.dispatchEvent(event);
   addCardInputLink.dispatchEvent(event);
 }
-
-
-
 //add event listeners for open/close addCard window and form addCard
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 addCardAddBtn.addEventListener('click', () => {
@@ -141,17 +129,6 @@ addCardCloseBtn.addEventListener('click', () => {
   popupClose(addCardWindow);
 });
 
-
-function showPhoto(evt) {
-  popupOpen(showPhotoWindow);
-  showPhotoWindow.querySelector('.show-photo__image').src = evt.target.src;
-  showPhotoWindow.querySelector('.show-photo__title').innerText = evt.target.parentElement.querySelector('.place__title').innerText;
-}
-showPhotoCloseBtn.addEventListener('click', (evt) => {
-  popupClose(showPhotoWindow);
-});
-
-
 const validationEditProfileForm = new FormValidator(formValidationOptions, editProfileForm);
 validationEditProfileForm.enableValidation();
 const validationAddCardForm = new FormValidator(formValidationOptions, addCardForm);
@@ -161,7 +138,7 @@ validationAddCardForm.enableValidation();
 window.onload = function () {
   addCardInitialCards.forEach((elem) => {
     const card = new Card(elem.name, elem.link, '#cardPlace');
-    const cardElement = card._getCardElement();
+    const cardElement = card.getCardElement();
     addCardCardImageWrapper.prepend(cardElement);
   });
 

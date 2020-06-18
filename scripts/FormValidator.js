@@ -27,7 +27,6 @@ export class FormValidator {
       this._hideInputError(inputElement);
     }
   }
-
   _toggleButtonState() {
     const buttonElement = this._formName.querySelector(this._submitButtonSelector);
     if (this._formName.checkValidity()) {
@@ -60,6 +59,5 @@ export class FormValidator {
       });
     });
   }
-
 }
 

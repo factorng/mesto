@@ -9,7 +9,6 @@ export class Card {
     .querySelector('.place')
     .cloneNode(true);
   }
-
   _pressLike() {
     this._cardElement.querySelector('.place__button-like').classList.toggle('place__button-like_active');
   }
@@ -40,16 +39,16 @@ export class Card {
       if (evt.target.classList.contains('popup_open') && opened)  {
         this._closeFullImage();
       }
-    }, {once: true});
+    });
     showPhotoWindow.querySelector('.show-photo__button-close').addEventListener('click', (evt) => {
       this._closeFullImage();
-    });
+    }, {once: true});
   }
   _closeFullImage() {
     const showPhotoWindow = document.querySelector('.show-photo');
     showPhotoWindow.classList.remove('popup_open');
   }
-  _getCardElement() {
+  getCardElement() {
     const image = this._cardElement.querySelector('.place__image');
     const title = this._cardElement.querySelector('.place__title');
     title.innerText = this._name;
