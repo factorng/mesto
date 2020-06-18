@@ -70,9 +70,7 @@ function editProfileFormSubmitHandler(evt) {
 function editProfileFormDataHandler() {
   editProfileInputName.value = editProfileProfileName.textContent;
   editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
-  const event = new Event('input');
-  editProfileInputName.dispatchEvent(event);
-  editProfileInputOccupation.dispatchEvent(event);
+  validationEditProfileForm.resetValidation(editProfileInputName, editProfileInputOccupation);
 }
 function popupOpen(elem) {
   elem.classList.add('popup_open');
@@ -115,9 +113,10 @@ function addCardFormSubmitHandler(evt) {
 function addCardFormDataHandler() {
   addCardInputName.value = '';
   addCardInputLink.value = '';
-  const event = new Event('errorClear');
-  addCardInputName.dispatchEvent(event);
-  addCardInputLink.dispatchEvent(event);
+  validationAddCardForm.resetValidation(addCardInputName, addCardInputLink)
+  // const event = new Event('errorClear');
+  // addCardInputName.dispatchEvent(event);
+  // addCardInputLink.dispatchEvent(event);
 }
 //add event listeners for open/close addCard window and form addCard
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
