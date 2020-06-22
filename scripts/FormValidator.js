@@ -8,18 +8,21 @@ export class FormValidator {
     this._inputErrorClass = formElements.inputErrorClass;
     this._errorClass = formElements.errorClass;
   }
+
   _showInputError(inputElement, errorMessage,) {
     const errorElement = this._formName.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._errorClass );
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass );
   }
+
   _hideInputError(inputElement) {
     const errorElement = this._formName.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
+
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -27,6 +30,7 @@ export class FormValidator {
       this._hideInputError(inputElement);
     }
   }
+
   _toggleButtonState() {
     const buttonElement = this._formName.querySelector(this._submitButtonSelector);
     if (this._formName.checkValidity()) {
@@ -37,10 +41,12 @@ export class FormValidator {
       buttonElement.disabled = true;
     }
   }
+
   resetValidation(...inputElements) {
     inputElements.forEach(inputElement => this._hideInputError(inputElement));
     this._toggleButtonState();
   }
+
   enableValidation() {
     const inputList = Array.from(this._formName.querySelectorAll(this._inputSelector));
     this._formName.addEventListener('sumbit', (evt) => {

@@ -1,5 +1,7 @@
+import {addCardInitialCards} from './initialCards.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+
 
 const formValidationOptions = {
   formSelector: '.popup__form',
@@ -29,31 +31,7 @@ const addCardCloseBtn = document.querySelector('.add-card__button-close');
 const addCardCardImageWrapper = document.querySelector('.places');
 const addCardInputName = document.querySelector('.add-card__input-name');
 const addCardInputLink = document.querySelector('.add-card__input-link');
-const addCardInitialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 
 // Photo popup globals
 const showPhotoCloseBtn = document.querySelector('.show-photo__button-close');
@@ -65,41 +43,49 @@ function editProfileFormSubmitHandler(evt) {
   editProfileProfileOccupation.textContent = editProfileInputOccupation.value;
   popupClose(editProfileEditWindow);
 }
+
 function editProfileFormDataHandler() {
   editProfileInputName.value = editProfileProfileName.textContent;
   editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
   validationEditProfileForm.resetValidation(editProfileInputName, editProfileInputOccupation);
 }
+
 function popupOpen(elem) {
   elem.classList.add('popup_open');
   document.addEventListener('keydown', escKeyDown);
   document.addEventListener('click', popupOverlayClick);
 }
+
 function popupClose(elem) {
   elem.classList.remove('popup_open');
   document.removeEventListener('keydown', escKeyDown);
   document.removeEventListener('click', popupOverlayClick);
 }
+
 function escKeyDown(evt) {
   const opened = document.querySelector('.popup_open');
   if ((evt.key === 'Escape') && opened) {
     popupClose(opened);
   }
 }
+
 function popupOverlayClick(evt) {
   const opened = document.querySelector('.popup_open');
   if (evt.target.classList.contains('popup_open') && opened) {
     popupClose(opened);
   }
 }
+
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
 editProfileEditBtn.addEventListener('click', () => {
   editProfileFormDataHandler();
   popupOpen(editProfileEditWindow);
 });
+
 editProfileCloseBtn.addEventListener('click', () => {
   popupClose(editProfileEditWindow);
 });
+
 function addCardFormSubmitHandler(evt) {
   evt.preventDefault();
   const card = new Card(addCardInputName.value, addCardInputLink.value, '#cardPlace');
@@ -113,12 +99,14 @@ function addCardFormDataHandler() {
   addCardInputLink.value = '';
   validationAddCardForm.resetValidation(addCardInputName, addCardInputLink)
 }
+
 //add event listeners for open/close addCard window and form addCard
 addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 addCardAddBtn.addEventListener('click', () => {
   addCardFormDataHandler();
   popupOpen(addCardWindow);
 });
+
 addCardCloseBtn.addEventListener('click', () => {
   popupClose(addCardWindow);
 });
@@ -128,12 +116,10 @@ validationEditProfileForm.enableValidation();
 const validationAddCardForm = new FormValidator(formValidationOptions, addCardForm);
 validationAddCardForm.enableValidation();
 
+addCardInitialCards.forEach((elem) => {
+  const card = new Card(elem.name, elem.link, '#cardPlace');
+  const cardElement = card.getCardElement();
+  addCardCardImageWrapper.prepend(cardElement);
+});
 
-window.onload = function () {
-  addCardInitialCards.forEach((elem) => {
-    const card = new Card(elem.name, elem.link, '#cardPlace');
-    const cardElement = card.getCardElement();
-    addCardCardImageWrapper.prepend(cardElement);
-  });
 
-};

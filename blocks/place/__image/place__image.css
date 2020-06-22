@@ -4,3 +4,7 @@
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
+.place__image:hover {
+  opacity: .6;
+  transition: .6s;
+}
