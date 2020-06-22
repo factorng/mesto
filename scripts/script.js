@@ -1,6 +1,9 @@
 import {addCardInitialCards} from './initialCards.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+import {popupOpen} from './utils.js';
+import {popupClose} from './utils.js';
+
 
 
 const formValidationOptions = {
@@ -35,7 +38,6 @@ const addCardInputLink = document.querySelector('.add-card__input-link');
 
 // Photo popup globals
 const showPhotoCloseBtn = document.querySelector('.show-photo__button-close');
-const showPhotoWindow = document.querySelector('.show-photo');
 
 function editProfileFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -48,32 +50,6 @@ function editProfileFormDataHandler() {
   editProfileInputName.value = editProfileProfileName.textContent;
   editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
   validationEditProfileForm.resetValidation(editProfileInputName, editProfileInputOccupation);
-}
-
-function popupOpen(elem) {
-  elem.classList.add('popup_open');
-  document.addEventListener('keydown', escKeyDown);
-  document.addEventListener('click', popupOverlayClick);
-}
-
-function popupClose(elem) {
-  elem.classList.remove('popup_open');
-  document.removeEventListener('keydown', escKeyDown);
-  document.removeEventListener('click', popupOverlayClick);
-}
-
-function escKeyDown(evt) {
-  const opened = document.querySelector('.popup_open');
-  if ((evt.key === 'Escape') && opened) {
-    popupClose(opened);
-  }
-}
-
-function popupOverlayClick(evt) {
-  const opened = document.querySelector('.popup_open');
-  if (evt.target.classList.contains('popup_open') && opened) {
-    popupClose(opened);
-  }
 }
 
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
@@ -109,6 +85,12 @@ addCardAddBtn.addEventListener('click', () => {
 
 addCardCloseBtn.addEventListener('click', () => {
   popupClose(addCardWindow);
+});
+
+// add X button eventListener
+showPhotoCloseBtn.addEventListener('click', (evt) => {
+  const showPhotoWindow = document.querySelector('.show-photo');
+  showPhotoWindow.classList.remove('popup_open');
 });
 
 const validationEditProfileForm = new FormValidator(formValidationOptions, editProfileForm);

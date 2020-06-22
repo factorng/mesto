@@ -1,3 +1,7 @@
+import {popupOpen} from './utils.js';
+
+const showPhotoWindow = document.querySelector('.show-photo');
+
 export class Card {
   constructor(name, link, templateCardSelector) {
     this._name = name;
@@ -35,30 +39,9 @@ export class Card {
   }
 
   _showFullImage() {
-    const showPhotoWindow = document.querySelector('.show-photo');
     showPhotoWindow.querySelector('.show-photo__image').src = this._cardElement.querySelector('.place__image').src;
     showPhotoWindow.querySelector('.show-photo__title').innerText = this._cardElement.querySelector('.place__title').innerText;
-    showPhotoWindow.classList.add('popup_open');
-    const opened = document.querySelector('.popup_open');
-    document.addEventListener('keydown', (evt) => {
-      if((evt.key === 'Escape') && opened) {
-         this._closeFullImage();
-       }
-      }, {once: true});
-
-    document.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup_open') && opened)  {
-        this._closeFullImage();
-      }
-    });
-    showPhotoWindow.querySelector('.show-photo__button-close').addEventListener('click', (evt) => {
-      this._closeFullImage();
-    }, {once: true});
-  }
-
-  _closeFullImage() {
-    const showPhotoWindow = document.querySelector('.show-photo');
-    showPhotoWindow.classList.remove('popup_open');
+    popupOpen(showPhotoWindow);
   }
 
   getCardElement() {
