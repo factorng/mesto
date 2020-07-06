@@ -1,27 +1,17 @@
 import {addCardInitialCards} from './initialCards.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
-import {popupOpen} from './utils.js';
-import {popupClose} from './utils.js';
-
-
-
-const formValidationOptions = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'popup__button-submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
+import {PopupWithImage} from './PopupWithImage.js';
+import {PopupWithForm} from './PopupWithForm.js';
+import {UserInfo} from './UserInfo.js';
+import {Section} from './Section.js';
+import {formValidationOptions} from './constants.js';
 
 
 //editProfile globals
 const editProfileCloseBtn = document.querySelector('.popup__button-close');
 const editProfileEditBtn = document.querySelector('.profile__edit-button');
 const editProfileEditWindow = document.querySelector('.edit-profile');
-const editProfileProfileName = document.querySelector('.profile__name');
-const editProfileProfileOccupation = document.querySelector('.profile__occupation');
 const editProfileInputName = document.querySelector('.edit-profile__input-name');
 const editProfileInputOccupation = document.querySelector('.edit-profile__input-occupation');
 const editProfileForm = document.querySelector('.edit-profile__form');
@@ -30,78 +20,62 @@ const editProfileForm = document.querySelector('.edit-profile__form');
 const addCardForm = document.querySelector('.add-card__form');
 const addCardWindow = document.querySelector('.add-card');
 const addCardAddBtn = document.querySelector('.profile__add-button');
-const addCardCloseBtn = document.querySelector('.add-card__button-close');
 const addCardCardImageWrapper = document.querySelector('.places');
 const addCardInputName = document.querySelector('.add-card__input-name');
 const addCardInputLink = document.querySelector('.add-card__input-link');
 
+//show photo globals
+const showPhotoWindow = document.querySelector('.show-photo');
 
-// Photo popup globals
-const showPhotoCloseBtn = document.querySelector('.show-photo__button-close');
 
-function editProfileFormSubmitHandler(evt) {
-  evt.preventDefault();
-  editProfileProfileName.textContent = editProfileInputName.value;
-  editProfileProfileOccupation.textContent = editProfileInputOccupation.value;
-  popupClose(editProfileEditWindow);
-}
+const userInfo = new UserInfo({name: '.profile__name', occupation: '.profile__occupation'});
+const editPrfl = new PopupWithForm(editProfileEditWindow, {
+  submitForm: (item) => {
+    userInfo.setUserInfo(item);
+  }
+});
+editPrfl.setEventListeners();
 
-function editProfileFormDataHandler() {
-  editProfileInputName.value = editProfileProfileName.textContent;
-  editProfileInputOccupation.value = editProfileProfileOccupation.textContent;
-  validationEditProfileForm.resetValidation(editProfileInputName, editProfileInputOccupation);
-}
-
-editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
 editProfileEditBtn.addEventListener('click', () => {
-  editProfileFormDataHandler();
-  popupOpen(editProfileEditWindow);
+  const userData = userInfo.getUserInfo();
+  validationEditProfileForm.resetValidation(editProfileInputName, editProfileInputOccupation);
+  editProfileInputName.value = userData.name;
+  editProfileInputOccupation.value = userData.occupation;
+  editPrfl.open();
 });
 
-editProfileCloseBtn.addEventListener('click', () => {
-  popupClose(editProfileEditWindow);
+const addCardFormClass = new PopupWithForm(addCardWindow, {
+  submitForm:  (item) => {
+    const card = new Card(item.name, item.link, '#cardPlace', {
+      handleCardClick: () => {
+        popupWithImage.open(item);
+      }
+    });
+    CardsList.addItem(card.getCardElement());
+  }
 });
+addCardFormClass.setEventListeners();
 
-function addCardFormSubmitHandler(evt) {
-  evt.preventDefault();
-  const card = new Card(addCardInputName.value, addCardInputLink.value, '#cardPlace');
-  const cardElement = card.getCardElement();
-  addCardCardImageWrapper.prepend(cardElement);
-  popupClose(addCardWindow);
-}
-
-function addCardFormDataHandler() {
-  addCardInputName.value = '';
-  addCardInputLink.value = '';
-  validationAddCardForm.resetValidation(addCardInputName, addCardInputLink)
-}
-
-//add event listeners for open/close addCard window and form addCard
-addCardForm.addEventListener('submit', addCardFormSubmitHandler);
 addCardAddBtn.addEventListener('click', () => {
-  addCardFormDataHandler();
-  popupOpen(addCardWindow);
+  validationAddCardForm.resetValidation(addCardInputName, addCardInputLink);
+  addCardFormClass.open();
 });
 
-addCardCloseBtn.addEventListener('click', () => {
-  popupClose(addCardWindow);
-});
-
-// add X button eventListener
-showPhotoCloseBtn.addEventListener('click', (evt) => {
-  const showPhotoWindow = document.querySelector('.show-photo');
-  showPhotoWindow.classList.remove('popup_open');
-});
-
+const popupWithImage = new PopupWithImage(showPhotoWindow, showPhotoWindow.querySelector('.show-photo__image'), showPhotoWindow.querySelector('.show-photo__title') );
+const CardsList = new Section({
+  items: addCardInitialCards, renderer: (item) => {
+    const card = new Card(item.name, item.link, '#cardPlace', {
+      handleCardClick: () => {
+        popupWithImage.open(item);
+      }
+    });
+    CardsList.addItem(card.getCardElement());
+  }
+},
+  addCardCardImageWrapper
+);
+CardsList.renderAllItems();
 const validationEditProfileForm = new FormValidator(formValidationOptions, editProfileForm);
 validationEditProfileForm.enableValidation();
 const validationAddCardForm = new FormValidator(formValidationOptions, addCardForm);
 validationAddCardForm.enableValidation();
-
-addCardInitialCards.forEach((elem) => {
-  const card = new Card(elem.name, elem.link, '#cardPlace');
-  const cardElement = card.getCardElement();
-  addCardCardImageWrapper.prepend(cardElement);
-});
-
-

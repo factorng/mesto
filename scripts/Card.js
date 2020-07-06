@@ -1,12 +1,9 @@
-import {popupOpen} from './utils.js';
-
-const showPhotoWindow = document.querySelector('.show-photo');
-
 export class Card {
-  constructor(name, link, templateCardSelector) {
+  constructor(name, link, templateCardSelector, {handleCardClick}) {
     this._name = name;
     this._link = link;
     this._templateCardSelector = templateCardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardTemplate() {
@@ -29,19 +26,13 @@ export class Card {
       this._pressLike();
     });
     this._cardElement.querySelector('.place__image').addEventListener('click', () =>{
-      this._showFullImage();
+      this._handleCardClick();
     });
   }
 
   _cardDelete() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-
-  _showFullImage() {
-    showPhotoWindow.querySelector('.show-photo__image').src = this._cardElement.querySelector('.place__image').src;
-    showPhotoWindow.querySelector('.show-photo__title').innerText = this._cardElement.querySelector('.place__title').innerText;
-    popupOpen(showPhotoWindow);
   }
 
   getCardElement() {
