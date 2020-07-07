@@ -14,13 +14,20 @@ module.exports = (env) => {
         if (env.mode === 'production') {
             cssLoader.push('postcss-loader')
         }
-
+    let sourceMap = 'source-map';
+    if (env.mode === 'production') {
+      sourceMap = ' cheap-module-source-map ';
+    }
     return {
         entry: { main: './src/pages/index.js' },
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: '[name]-[chunkhash].js'
         },
+        devServer: {
+          port: 8089,
+        },
+        devtool: sourceMap,
         mode: env.mode,
         module: {
             rules: [
@@ -44,6 +51,7 @@ module.exports = (env) => {
             ],
         },
         plugins: [
+            new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 template: './src/index.html'
             }),

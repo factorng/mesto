@@ -1,17 +1,16 @@
 import './index.css';
 
-import {addCardInitialCards} from '../components/initialCards.js';
+import {addCardInitialCards} from '../utils/initialCards.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Section} from '../components/Section.js';
-import {formValidationOptions} from '../components/constants.js';
+import {formValidationOptions} from '../utils/constants.js';
 
 
 //editProfile globals
-const editProfileCloseBtn = document.querySelector('.popup__button-close');
 const editProfileEditBtn = document.querySelector('.profile__edit-button');
 const editProfileEditWindow = document.querySelector('.edit-profile');
 const editProfileInputName = document.querySelector('.edit-profile__input-name');
@@ -53,7 +52,7 @@ const addCardFormClass = new PopupWithForm(addCardWindow, {
         popupWithImage.open(item);
       }
     });
-    CardsList.addItem(card.getCardElement());
+    cardsList.addItem(card.getCardElement());
   }
 });
 addCardFormClass.setEventListeners();
@@ -64,19 +63,20 @@ addCardAddBtn.addEventListener('click', () => {
 });
 
 const popupWithImage = new PopupWithImage(showPhotoWindow, showPhotoWindow.querySelector('.show-photo__image'), showPhotoWindow.querySelector('.show-photo__title') );
-const CardsList = new Section({
+const cardsList = new Section({
   items: addCardInitialCards, renderer: (item) => {
     const card = new Card(item.name, item.link, '#cardPlace', {
       handleCardClick: () => {
         popupWithImage.open(item);
+        popupWithImage.setEventListeners();
       }
     });
-    CardsList.addItem(card.getCardElement());
+    cardsList.addItem(card.getCardElement());
   }
 },
   addCardCardImageWrapper
 );
-CardsList.renderAllItems();
+cardsList.renderAllItems();
 const validationEditProfileForm = new FormValidator(formValidationOptions, editProfileForm);
 validationEditProfileForm.enableValidation();
 const validationAddCardForm = new FormValidator(formValidationOptions, addCardForm);
