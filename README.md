@@ -13,7 +13,7 @@
 4. Javascript для управления модальным окном
 5. Использование классов es6
 
-#### [Ссылка на  проект](https://factorng.github.io/mesto/src/index.html)
+#### [Ссылка на  проект](https://factorng.github.io/mesto/)
 
 ### Автор:
 * Ефимов Алексей
