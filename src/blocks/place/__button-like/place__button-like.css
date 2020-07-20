@@ -5,14 +5,15 @@
   background-size: contain;
   background-repeat: no-repeat;
   border: 0;
-  width: 22px;
-  height: 20px;
+  width: 20px;
+  height: 18px;
   cursor: pointer;
   margin-left: auto;
 }
 .place__button-like:hover {
   opacity: .6;
   transition: .6s;
+  cursor: pointer;
 }
 .place__button-like:focus {
   outline: none;

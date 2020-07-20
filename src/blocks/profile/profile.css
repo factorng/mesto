@@ -4,12 +4,14 @@
 @import url(./__occupation/profile__occupation.css);
 @import url(./__add-button/profile__add-button.css);
 @import url(./__edit-button/profile__edit-button.css);
+@import url(./__avatar-hover/profile__avatar-hover.css);
 .profile {
   max-width: 882px;
   margin: 0 auto 54px auto;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
 }
 @media screen and (max-width: 930px) {
   .profile {

@@ -1,7 +1,9 @@
 @import url(./__image/place__image.css);
 @import url(./__description/place__description.css);
 @import url(./__title/place__title.css);
+@import url(./__like/place__like.css);
 @import url(./__button-like/place__button-like.css);
+@import url(./__like-count/place__like-count.css);
 @import url(./__button-like/_active/place__button-like_active.css);
 @import url(./__button-delete/place__button-delete.css);
 .place {
@@ -10,3 +12,5 @@
   justify-self: start;
   position: relative;
 }
+
+
