@@ -9,7 +9,7 @@ export class UserInfo {
       name: this._profileName.textContent,
       occupation: this._profileOccupation.textContent,
       avatar: this._profileAvatar
-    }
+    };
   }
   setUserInfo(user) {
     this._profileName.textContent = user.name;

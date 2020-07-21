@@ -12,5 +12,10 @@ export class PopupWithImage extends Popup {
     this._title.textContent = item.name;
     super.open();
   }
+  setEventListeners() {
+    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('click', this._handleOverlayClose.bind(this));
+    this._popupSelector.querySelector('.show-photo__button-close').addEventListener('click', this.close.bind(this), {once : true});
+  }
 }
 

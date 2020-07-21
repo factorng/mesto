@@ -23,6 +23,6 @@ export class Popup {
   setEventListeners() {
     document.addEventListener('keydown', this._handleEscClose.bind(this));
     document.addEventListener('click', this._handleOverlayClose.bind(this));
-    this._popupSelector.querySelector('.popup__button-close').addEventListener('click', this.close.bind(this)); //do ones
+    this._popupSelector.querySelector('.popup__button-close').addEventListener('click', this.close.bind(this), {once : true});
   }
 }

@@ -5,9 +5,8 @@
   "description": "sample app using webpack",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --env.mode=development",
+    "build": "webpack --env.mode=production",
     "dev": "webpack-dev-server --open chrome  --watch --env.mode=development",
-    "production": "webpack --env.mode=production",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [
