@@ -41,7 +41,6 @@ const confirmDelete = new Popup(confirmationForm);
 
 function cardDeleteWithConfirmation(id) {
   confirmDelete.open();
-  confirmDelete.setEventListeners();
   document.querySelector('.confirmation__form').addEventListener('submit', (evt) => {
     evt.preventDefault();
     confirmDelete.close();
@@ -80,7 +79,7 @@ const editPrfl = new PopupWithForm(editProfileEditWindow, {
       });
   }
 });
-editPrfl.setEventListeners();
+
 
 
 const cardsList = new Section({
@@ -124,7 +123,7 @@ const changeAvatar = new PopupWithForm(changeAvatarWindow, {
         });
   }
 });
-changeAvatar.setEventListeners();
+
 
 profileAvatar.addEventListener('click', () => {
   validationChangeAvatarForm.resetValidation(changeAvatarInput);
@@ -139,7 +138,6 @@ const addCardFormClass = new PopupWithForm(addCardWindow, {
         const card = new Card(res, userInfo.getUserId(), '#cardPlace', {
           handleCardClick: () => {
             popupWithImage.open(item);
-            popupWithImage.setEventListeners();
           },
           handleCardDelete:(id) => {
             cardDeleteWithConfirmation(id);
@@ -156,7 +154,7 @@ const addCardFormClass = new PopupWithForm(addCardWindow, {
         });
     }
 });
-addCardFormClass.setEventListeners();
+
 
 addCardAddBtn.addEventListener('click', () => {
   validationAddCardForm.resetValidation(addCardInputName, addCardInputLink);
