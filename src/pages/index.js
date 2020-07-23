@@ -87,7 +87,6 @@ const cardsList = new Section({
     const card = new Card(item, userInfo.getUserId(), '#cardPlace', {
       handleCardClick: () => {
         popupWithImage.open(item);
-        popupWithImage.setEventListeners();
       },
       handleCardDelete:(id) => {
         cardDeleteWithConfirmation(id);
