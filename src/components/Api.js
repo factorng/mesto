@@ -62,12 +62,7 @@ export class Api {
         link: link
       })
     })
-    .then(result => {
-      if(result.ok) {
-        return result.json();
-      }
-      return Promise.reject(`error${result.status}`);
-    });
+    .then(result => result.json());
   }
   setUserAvatar(newAvatar) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {

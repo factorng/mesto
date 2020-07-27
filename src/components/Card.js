@@ -51,7 +51,7 @@ export class Card {
 
   _setEventListeners() {
     this._cardElement.querySelector('.place__button-delete').addEventListener('click', () =>{
-      this._handleCardDelete(this._cardId);
+      this._handleCardDelete(this);
     });
     this._cardElement.querySelector('.place__button-like').addEventListener('click', () => {
       this._pressLike();
@@ -80,7 +80,6 @@ export class Card {
     image.alt = this._name;
     image.src = this._link;
     like.innerText = this._like.length;
-    this._cardElement.id = this._cardId;
     this._setEventListeners();
     return this._cardElement;
   }

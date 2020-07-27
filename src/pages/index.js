@@ -39,19 +39,19 @@ const confirmationForm = document.querySelector('.confirmation');
 
 const confirmDelete = new Popup(confirmationForm);
 
-function cardDeleteWithConfirmation(id) {
+function cardDeleteWithConfirmation(card) {
   confirmDelete.open();
   document.querySelector('.confirmation__form').addEventListener('submit', (evt) => {
     evt.preventDefault();
     confirmDelete.close();
-    api.deleteCard(id)
+    api.deleteCard(card._cardId)
       .then(() => {
-        document.getElementById(id).remove();
+        card._cardElement.remove();
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, {once: true});
 }
 
 const userInfo = new UserInfo({name: '.profile__name', occupation: '.profile__occupation', avatar: '.profile__logo'});
@@ -88,8 +88,8 @@ const cardsList = new Section({
       handleCardClick: () => {
         popupWithImage.open(item);
       },
-      handleCardDelete:(id) => {
-        cardDeleteWithConfirmation(id);
+      handleCardDelete:(card) => {
+        cardDeleteWithConfirmation(card);
       },
       handleLikeAdd: api.putLike.bind(api),
       handleLikeRemove: api.removeLike.bind(api)
@@ -138,8 +138,8 @@ const addCardFormClass = new PopupWithForm(addCardWindow, {
           handleCardClick: () => {
             popupWithImage.open(item);
           },
-          handleCardDelete:(id) => {
-            cardDeleteWithConfirmation(id);
+          handleCardDelete:(card) => {
+            cardDeleteWithConfirmation(card);
           },
           handleLikeAdd: api.putLike.bind(api),
           handleLikeRemove: api.removeLike.bind(api)
@@ -147,10 +147,10 @@ const addCardFormClass = new PopupWithForm(addCardWindow, {
         cardsList.addItem(card.getCardElement());
         addCardFormClass.close();
         progress(addCardWindow, false, 'Создать');
-        })
-        .catch((error) => {
+      })
+      .catch((error) => {
           console.log(error);
-        });
+      });
     }
 });
 
